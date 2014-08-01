@@ -1,0 +1,35 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-client" />
+    <file type="web" url="file://${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-worker" />
+  </component>
+  <component name="IdProvider" IDEtalkID="99F00A0EF52A660C9273A65443B1170B" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-client/pom.xml" />
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-dao/pom.xml" />
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-entities/pom.xml" />
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-services/pom.xml" />
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/${artifactId}-worker/pom.xml" />
+        <option value="${symbol_dollar}PROJECT_DIR${symbol_dollar}/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://${symbol_dollar}PROJECT_DIR${symbol_dollar}/out" />
+  </component>
+</project>
+
