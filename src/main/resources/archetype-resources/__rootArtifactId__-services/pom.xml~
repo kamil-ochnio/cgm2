@@ -2,31 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>${groupId}.${artifactId}</groupId>
+    <groupId>${groupId}.kino</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
 	<packaging>jar</packaging>
 
-    <name>${artifactId}-dao</name>
-
-    <properties>
-        <kino.version>1.0.0</kino.version>
-        <dao-hibernate.version>1.2.0</dao-hibernate.version>
-        <hibernate.version>3.5.0-Final</hibernate.version>
-    </properties>
-
+    <name>kino-services</name>
     <dependencies>
         <dependency>
-            <groupId>${groupId}.${artifactId}</groupId>
+            <groupId>${groupId}.kino</groupId>
             <artifactId>${rootArtifactId}-entities</artifactId>
             <version>${version}</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>dao-hibernate</artifactId>
-            <version>${dao-hibernate.version}</version>
+            <groupId>${groupId}.kino</groupId>
+            <artifactId>${rootArtifactId}-dao</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
-
-
 </project>
