@@ -1,0 +1,92 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                           http://www.springframework.org/schema/jee
+                           http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <tx:annotation-driven/>
+
+
+    <bean id="dataSource"
+          class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+            <value>java:comp/env/jdbc/eodrepositoryDB</value>
+        </property>
+    </bean>
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="jadira.usertype.autoRegisterUserTypes">true</prop>
+                <prop key="jadira.usertype.databaseZone">jvm</prop>
+                <prop key="jadira.usertype.javaZone">jvm</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="${package}.model"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="SYBASE"/>
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="false"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="jamonAspect" class="com.jamonapi.aop.spring.JamonAspect"/>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="search*" read-only="true"/>
+            <tx:method name="count*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="is*" read-only="true"/>
+            <tx:method name="check*" read-only="true"/>
+            <tx:method name="calculate*" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED" timeout="150"
+                       rollback-for="${package}.common.exception.BusinessException"/>
+        </tx:attributes>
+
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="serviceOperation"
+                      expression="execution(* ${package}.*.*Service.*(..))"/>
+        <aop:pointcut id="finderOperation"
+                      expression="execution(* ${package}.*.*Finder.*(..))"/>
+        <aop:pointcut id="repositoryOperation"
+                      expression="execution(* ${package}.*.*Repository.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="finderOperation"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="repositoryOperation"/>
+        <aop:aspect id="jamonSpringAspect" ref="jamonAspect">
+            <aop:around pointcut-ref="serviceOperation" method="monitor"/>
+            <aop:around pointcut-ref="finderOperation" method="monitor"/>
+            <aop:around pointcut-ref="repositoryOperation" method="monitor"/>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
