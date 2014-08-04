@@ -1,0 +1,2 @@
+INSERT INTO EodDictionaries(id, name, slug, rwaFlag) VALUES (1, 'Rodzaj dokumenów', 'kind', 0);
+INSERT INTO EodDictionary(id, idEodDictionaries, name, slug) VALUES (1, 1, 'Dokumenty przychodzące', 'incoming');

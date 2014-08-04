@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>archetype.it</groupId>
+	    <artifactId>basic</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>basic-model</artifactId>
+
+    <packaging>jar</packaging>
+    <groupId>archetype.it</groupId>
+    <version>0.1-SNAPSHOT</version>
+    <name>eod repository  Model</name>
+    <description>basic-model repository  JPA 2.1 Annotated Entities</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+
+
+</project>
